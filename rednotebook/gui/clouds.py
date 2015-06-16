@@ -78,6 +78,7 @@ class Cloud(HtmlView):
 
         default_ignore_list = _('filter, these, comma, separated, words, and, #tags')
         self.ignore_list = config.read_list('cloudIgnoreList', default_ignore_list)
+        self.gitRepoConfig = config.read('gitRepoConfig', None)
         self.ignore_list = [word.lower() for word in self.ignore_list]
         logging.info('Cloud ignore list: %s' % self.ignore_list)
 

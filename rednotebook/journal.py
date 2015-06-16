@@ -288,6 +288,14 @@ class Journal:
         options['font'] = self.config.read('previewFont', 'Ubuntu, sans-serif')
         return markup.convert(text, target, self.dirs.data_dir, headers=headers, options=options)
 
+    def git_commit(self, directory):
+        self.config.gitRepoConfig
+        cmd = "git commit --work-tree {d} -m \"{m}\" --author \"rednotebook <no@email>\"".format(
+                d = directory,
+                m = "exit commit",
+                )
+        subprocess.check_call(cmd, shell=True);
+
     def save_to_disk(self, exit_imminent=False, changing_journal=False, saveas=False):
         self.save_old_day()
 
@@ -307,6 +315,8 @@ class Journal:
         if something_saved:
             self.show_message(_('The content has been saved to %s') % self.dirs.data_dir, error=False)
             logging.info('The content has been saved to %r' % self.dirs.data_dir)
+            if self.config['gitRepoConfig']:
+                self.git_commit(self.dirs.data_dir)
         elif something_saved is None:
             # Don't display this as an error, because we already show a dialog.
             self.show_message(_('The journal could not be saved'), error=False)

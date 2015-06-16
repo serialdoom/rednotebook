@@ -297,6 +297,8 @@ class OptionsManager(object):
                        tooltip=_('Do not show these comma separated words and #tags in the clouds')),
             TextOption(_('Include small words in cloud'), 'cloudIncludeList',
                        tooltip=_('Allow these words with 4 letters or less')),
+            TextOption(_('git repo'), 'gitRepoConfig',
+                       tooltip=_('Git repository to use')),
         ])
 
 
